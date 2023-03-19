@@ -1,4 +1,4 @@
-# Integration Blueprint
+# Integration ha_sense
 
 [![GitHub Release][releases-shield]][releases]
 [![GitHub Activity][commits-shield]][commits]
@@ -6,19 +6,18 @@
 
 [![hacs][hacsbadge]][hacs]
 ![Project Maintenance][maintenance-shield]
-[![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
+`[![BuyMeCoffee][buymecoffeebadge]][buymecoffee]`
 
 [![Discord][discord-shield]][discord]
 [![Community Forum][forum-shield]][forum]
 
-_Integration to integrate with [ha_sense][ha_sense]._
+_Integration to integrate with [sense][ha_sense].
 
 **This integration will set up the following platforms.**
 
 Platform | Description
 -- | --
-`binary_sensor` | Show something `True` or `False`.
-`sensor` | Show info from blueprint API.
+`sensor` | Show info from sense API.
 `switch` | Switch something `True` or `False`.
 
 ## Installation
@@ -29,7 +28,7 @@ Platform | Description
 1. Download _all_ the files from the `custom_components/ha_sense/` directory (folder) in this repository.
 1. Place the files you downloaded in the new directory (folder) you created.
 1. Restart Home Assistant
-1. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "Integration blueprint"
+1. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "sense custom reporting"
 
 ## Configuration is done in the UI
 
