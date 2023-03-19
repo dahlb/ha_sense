@@ -9,7 +9,7 @@ import async_timeout
 
 
 class IntegrationBlueprintApiClientError(Exception):
-    """Exception to indicate a general API error. """
+    """Exception to indicate a general API error."""
 
 
 class IntegrationBlueprintApiClientCommunicationError(
