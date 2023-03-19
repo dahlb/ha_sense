@@ -20,6 +20,7 @@ jobs:
           sed -i "s/\"version\": \".*\"/\"version\": \"${{steps.semantic_release_info.outputs.version}}\"/g" custom_components/ha_sense/manifest.json 
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          git diff
           git add -A
           git commit -m "chore: bumping version to ${{steps.semantic_release_info.outputs.version}}"
           git tag ${{ steps.semantic_release_info.outputs.git_tag }}
