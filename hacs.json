@@ -1,8 +1,7 @@
 {
-    "name": "Integration blueprint",
-    "filename": "integration_blueprint.zip",
-    "hide_default_branch": true,
+    "name": "Sense Custom Reporting",
     "homeassistant": "2022.2.0",
     "render_readme": true,
-    "zip_release": true
+    "content_in_root": false,
+    "country": ["US"]
 }

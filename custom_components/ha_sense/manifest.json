@@ -1,0 +1,12 @@
+{
+  "domain": "ha_sense",
+  "name": "Sense Custom Reporting",
+  "codeowners": [
+    "@dahlb"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/dahlb/ha_sense",
+  "iot_class": "cloud_push",
+  "issue_tracker": "https://github.com/dahlb/ha_sense/issues",
+  "version": "0.0.0"
+}
