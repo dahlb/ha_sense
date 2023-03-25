@@ -1,55 +1,67 @@
-"""Custom integration to integrate ha_sense with Home Assistant.
-
-For more details about this integration, please refer to
-https://github.com/dahlb/ha_sense
-"""
 from __future__ import annotations
 
+from sense_energy import (
+    SenseLink,
+)
+from asyncio import sleep
+from logging import Logger, getLogger
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_PASSWORD, CONF_USERNAME, Platform
+from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers.event import async_track_time_interval
+from datetime import timedelta
 
-from .api import IntegrationBlueprintApiClient
-from .const import DOMAIN
-from .coordinator import BlueprintDataUpdateCoordinator
+from .const import (
+    DOMAIN,
+    CONF_DEVICES,
+    CONF_SENSE_LINK,
+)
+
+LOGGER: Logger = getLogger(__package__)
 
 PLATFORMS: list[Platform] = [
     Platform.SENSOR,
-    Platform.BINARY_SENSOR,
-    Platform.SWITCH,
 ]
 
 
-# https://developers.home-assistant.io/docs/config_entries_index/#setting-up-an-entry
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up this integration using UI."""
-    hass.data.setdefault(DOMAIN, {})
-    hass.data[DOMAIN][entry.entry_id] = coordinator = BlueprintDataUpdateCoordinator(
-        hass=hass,
-        client=IntegrationBlueprintApiClient(
-            username=entry.data[CONF_USERNAME],
-            password=entry.data[CONF_PASSWORD],
-            session=async_get_clientsession(hass),
-        ),
-    )
-    # https://developers.home-assistant.io/docs/integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities
-    await coordinator.async_config_entry_first_refresh()
-
-    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    LOGGER.debug("async_setup_entry")
     entry.async_on_unload(entry.add_update_listener(async_reload_entry))
+    data = {CONF_DEVICES: []}
+
+    def devices():
+        return data[CONF_DEVICES]
+
+    data[CONF_SENSE_LINK] = SenseLink(devices)
+
+    hass.data.setdefault(DOMAIN, data)
+    await data[CONF_SENSE_LINK].start()
+
+    def debug(_event):
+        LOGGER.debug("printing instance wattages")
+        for inst in data[CONF_DEVICES]:
+            LOGGER.debug(f"Plug {inst.alias} power: {inst.power}")
+        data[CONF_SENSE_LINK].print_instance_wattages()
+
+    async_track_time_interval(hass, debug, timedelta(minutes=2))
+    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
     return True
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Handle removal of an entry."""
+    LOGGER.debug("async_unload_entry")
     if unloaded := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
-        hass.data[DOMAIN].pop(entry.entry_id)
+        data = hass.data[DOMAIN]
+        LOGGER.debug("stopping listener")
+        await data[CONF_SENSE_LINK].stop()
+        await sleep(
+            5
+        )  # pause to allow port to be freed in case trying to reuse it, aka reloading integration
     return unloaded
 
 
 async def async_reload_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
-    """Reload config entry."""
+    LOGGER.debug("async_reload_entry")
     await async_unload_entry(hass, entry)
     await async_setup_entry(hass, entry)
