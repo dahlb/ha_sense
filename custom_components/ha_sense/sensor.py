@@ -71,7 +71,7 @@ class HaSenseSensorEntity(SensorEntity):
         common_identifier: tuple[str, str],
         tracked_entity_id: str,
     ) -> None:
-        """Sets up Sensor attributes."""
+        """Initialize Sensor attributes."""
         self.tracked_entity_id = tracked_entity_id
         self._attr_unique_id = f"{tracked_entity_id.partition('.')[2].replace('_electric_consumption_w', '')}_reporting_to_sense"
         if name is None:
