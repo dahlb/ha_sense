@@ -8,9 +8,9 @@
 ![Project Maintenance][maintenance-shield]
 
 
-
-
 Integration to report power usage to [sense][ha_sense] through kasa plug emulation.  This will create a disabled entity for each entity in home assistant that reports power usage in watts, ignoring those from sense and tplink integrations. Enable any created entity to begin emulating a kasa plug for it, disable to stop emulation. Names are copied from derived entity. 
+
+* Be sure to enable TP-Link Energy Monitoring Smart Plug inside the Sense App.
 
 **This integration will set up the following platforms.**
 
