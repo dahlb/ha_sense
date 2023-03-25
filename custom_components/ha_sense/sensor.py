@@ -81,8 +81,8 @@ class HaSenseSensorEntity(SensorEntity):
         self._attr_entity_registry_enabled_default = False
         self._attr_should_poll = False
         identifiers = {(DOMAIN, self.unique_id)}
-        #        if common_identifier is not None:
-        #            identifiers.add(common_identifier)
+        if common_identifier is not None:
+            identifiers.add(common_identifier)
         self._attr_device_info = DeviceInfo(
             identifiers=identifiers,
         )
@@ -92,9 +92,6 @@ class HaSenseSensorEntity(SensorEntity):
             name=name,
             icon="mdi:format-quote-close",
             device_class=SensorDeviceClass.POWER,
-        )
-        LOGGER.debug(
-            f"init;{self.tracked_entity_id}:{self._attr_unique_id}:{common_identifier}:{self.name}"
         )
 
     async def async_added_to_hass(self):
