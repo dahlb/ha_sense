@@ -20,9 +20,9 @@
     }
   ],
   "documentation": "https://github.com/dahlb/ha_sense",
-  "loggers": ["sense_energy"],
   "iot_class": "cloud_push",
   "issue_tracker": "https://github.com/dahlb/ha_sense/issues",
+  "loggers": ["sense_energy"],
   "requirements": ["sense_energy==0.11.1"],
   "version": "1.1.1"
 }
