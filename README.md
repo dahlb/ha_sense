@@ -44,6 +44,6 @@ logger:
 [hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge
 [forum]: https://community.home-assistant.io/
 [license-shield]: https://img.shields.io/github/license/dahlb/ha_sense.svg?style=for-the-badge
-[maintenance-shield]: https://img.shields.io/badge/maintainer-Joakim%20Sørensen%20%40dahlb-blue.svg?style=for-the-badge
+[maintenance-shield]: https://img.shields.io/badge/maintainer-Bren%20Dahl%20%40dahlb-blue.svg?style=for-the-badge
 [releases-shield]: https://img.shields.io/github/release/dahlb/ha_sense.svg?style=for-the-badge
 [releases]: https://github.com/dahlb/ha_sense/releases
