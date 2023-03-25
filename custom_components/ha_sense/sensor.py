@@ -36,15 +36,17 @@ async def async_setup_entry(hass, entry, async_add_devices):
                 device_registry = dr.async_get(hass)
                 hass_device: DeviceEntry = device_registry.async_get(e.device_id)
                 #               LOGGER.debug(f"device:{hass_device}")
+                name = e.entity_id
                 common_identifier = None
                 if hass_device is not None:
+                    name = hass_device.name_by_user
                     for identifier in hass_device.identifiers:
                         if identifier[0] != DOMAIN:
                             common_identifier = identifier
                 LOGGER.debug(f"common identifier:{common_identifier}")
                 devices.append(
                     HaSenseSensorEntity(
-                        name=hass_device.name_by_user,
+                        name=name,
                         common_identifier=common_identifier,
                         tracked_entity_id=e.entity_id,
                     )
