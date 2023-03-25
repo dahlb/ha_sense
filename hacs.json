@@ -1,5 +1,5 @@
 {
-    "name": "Sense Custom Reporting",
+    "name": "Sense Custom Reporting (Kasa Plug Emulation)",
     "homeassistant": "2022.2.0",
     "render_readme": true,
     "content_in_root": false,
