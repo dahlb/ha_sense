@@ -11,6 +11,7 @@ _LOGGER = logging.getLogger(__name__)
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Allow integration to be added through ui."""
+
     VERSION = 1
 
     async def async_step_user(self, user_input=None):

@@ -60,6 +60,7 @@ async def async_setup_entry(hass, entry, async_add_devices):
 
 class HaSenseSensorEntity(SensorEntity):
     """Sensor Representing whether to Report Associated entity's power to sense device through kasa emulation."""
+
     _attr_attribution = ATTRIBUTION
     plug: PlugInstance = None
     unsub = None
@@ -96,7 +97,7 @@ class HaSenseSensorEntity(SensorEntity):
         )
 
     async def async_added_to_hass(self):
-        """Invoked when entity is not disabled, adds emulation device and listener to update it."""
+        """Adds emulation device and listener to update it, invoked when entity is enabled."""
         self.plug = PlugInstance(
             self._attr_unique_id, alias=self.name.replace(" reporting to sense", "")
         )
@@ -110,7 +111,7 @@ class HaSenseSensorEntity(SensorEntity):
         )
 
     async def async_will_remove_from_hass(self):
-        """Invoked when entity disabled to remove listener and emulated device."""
+        """Removes listener and emulated device, invoked when entity is disabled."""
         self.hass.data[DOMAIN][CONF_DEVICES].remove(self.plug)
         self.unsub()
 
