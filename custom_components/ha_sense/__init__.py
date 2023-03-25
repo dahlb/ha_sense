@@ -1,3 +1,4 @@
+"""Create ha sense integration."""
 from __future__ import annotations
 
 from sense_energy import (
@@ -25,6 +26,7 @@ PLATFORMS: list[Platform] = [
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Create instance of integration."""
     LOGGER.debug("async_setup_entry")
     entry.async_on_unload(entry.add_update_listener(async_reload_entry))
     data = {CONF_DEVICES: []}
@@ -50,6 +52,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Free all resources used by integration."""
     LOGGER.debug("async_unload_entry")
     if unloaded := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
         data = hass.data[DOMAIN]
@@ -62,6 +65,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 
 async def async_reload_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
+    """Free and reinit."""
     LOGGER.debug("async_reload_entry")
     await async_unload_entry(hass, entry)
     await async_setup_entry(hass, entry)

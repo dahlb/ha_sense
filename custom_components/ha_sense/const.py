@@ -1,3 +1,4 @@
+"""Constants for ha_sense."""
 from logging import Logger, getLogger
 
 LOGGER: Logger = getLogger(__package__)

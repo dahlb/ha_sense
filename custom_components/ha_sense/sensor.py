@@ -1,3 +1,4 @@
+"""Setup ha_sense sensor platform."""
 from __future__ import annotations
 
 from sense_energy import (
@@ -23,6 +24,7 @@ LOGGER: Logger = getLogger(__package__)
 
 
 async def async_setup_entry(hass, entry, async_add_devices):
+    """Find all entities in system that report Power in Watts, creating disabled Sensors matching each."""
     devices = []
     entity_registry = er.async_get(hass)
     for entity in entity_registry.entities.values():
@@ -57,6 +59,7 @@ async def async_setup_entry(hass, entry, async_add_devices):
 
 
 class HaSenseSensorEntity(SensorEntity):
+    """Sensor Representing whether to Report Associated entity's power to sense device through kasa emulation."""
     _attr_attribution = ATTRIBUTION
     plug: PlugInstance = None
     unsub = None
@@ -93,6 +96,7 @@ class HaSenseSensorEntity(SensorEntity):
         )
 
     async def async_added_to_hass(self):
+        """Invoked when entity is not disabled, adds emulation device and listener to update it."""
         self.plug = PlugInstance(
             self._attr_unique_id, alias=self.name.replace(" reporting to sense", "")
         )
@@ -106,6 +110,7 @@ class HaSenseSensorEntity(SensorEntity):
         )
 
     async def async_will_remove_from_hass(self):
+        """Invoked when entity disabled to remove listener and emulated device."""
         self.hass.data[DOMAIN][CONF_DEVICES].remove(self.plug)
         self.unsub()
 
