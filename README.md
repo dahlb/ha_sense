@@ -6,51 +6,42 @@
 
 [![hacs][hacsbadge]][hacs]
 ![Project Maintenance][maintenance-shield]
-`[![BuyMeCoffee][buymecoffeebadge]][buymecoffee]`
 
 [![Discord][discord-shield]][discord]
 [![Community Forum][forum-shield]][forum]
 
-_Integration to integrate with [sense][ha_sense].
+_Integration to report power usage to [sense][ha_sense] through kasa plug emulation.
 
 **This integration will set up the following platforms.**
 
 Platform | Description
 -- | --
-`sensor` | Show info from sense API.
-`switch` | Switch something `True` or `False`.
+`sensor` | Represents kasa emulation device, when enabled will report power usage to sense over local network.
 
-## Installation
-
-1. Using the tool of choice open the directory (folder) for your HA configuration (where you find `configuration.yaml`).
-1. If you do not have a `custom_components` directory (folder) there, you need to create it.
-1. In the `custom_components` directory (folder) create a new folder called `ha_sense`.
-1. Download _all_ the files from the `custom_components/ha_sense/` directory (folder) in this repository.
-1. Place the files you downloaded in the new directory (folder) you created.
-1. Restart Home Assistant
-1. In the HA UI go to "Configuration" -> "Integrations" click "+" and search for "sense custom reporting"
-
-## Configuration is done in the UI
-
-<!---->
+## Installation ##
+You can install this either manually copying files or using HACS. Configuration can be done on UI, you need to enter your username and password.
 
 ## Contributions are welcome!
 
 If you want to contribute to this please read the [Contribution guidelines](CONTRIBUTING.md)
 
+## Troubleshooting ##
+1. You can enable logging for this integration specifically and share your logs, so I can have a deep dive investigation. To enable logging, update your `configuration.yaml` like this, we can get more information in Configuration -> Logs page
+```
+logger:
+  default: warning
+  logs:
+    custom_components.ha_sense: debug
+```
+
+
 ***
 
 [ha_sense]: https://github.com/dahlb/ha_sense
-[buymecoffee]: https://www.buymeacoffee.com/dahlb
-[buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
 [commits-shield]: https://img.shields.io/github/commit-activity/y/dahlb/ha_sense.svg?style=for-the-badge
 [commits]: https://github.com/dahlb/ha_sense/commits/main
 [hacs]: https://github.com/hacs/integration
 [hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge
-[discord]: https://discord.gg/Qa5fW2R
-[discord-shield]: https://img.shields.io/discord/330944238910963714.svg?style=for-the-badge
-[exampleimg]: example.png
-[forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge
 [forum]: https://community.home-assistant.io/
 [license-shield]: https://img.shields.io/github/license/dahlb/ha_sense.svg?style=for-the-badge
 [maintenance-shield]: https://img.shields.io/badge/maintainer-Joakim%20Sørensen%20%40dahlb-blue.svg?style=for-the-badge
