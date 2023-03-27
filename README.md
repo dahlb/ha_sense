@@ -15,6 +15,7 @@ Integration to report power usage to [sense][ha_sense] through kasa plug emulati
 
 **This integration will set up the following platforms.**
 
+
 Platform | Description
 -- | --
 `sensor` | Represents kasa emulation device, when enabled will report power usage to sense over local network.
