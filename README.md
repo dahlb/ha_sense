@@ -3,9 +3,10 @@
 [![GitHub Release][releases-shield]][releases]
 [![GitHub Activity][commits-shield]][commits]
 [![License][license-shield]](LICENSE)
-
 [![hacs][hacsbadge]][hacs]
+
 ![Project Maintenance][maintenance-shield]
+[![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
 ### Warning: this is a new integration and should be considered a project in its Alpha stage. ###
 
@@ -49,3 +50,5 @@ logger:
 [maintenance-shield]: https://img.shields.io/badge/maintainer-Bren%20Dahl%20%40dahlb-blue.svg?style=for-the-badge
 [releases-shield]: https://img.shields.io/github/release/dahlb/ha_sense.svg?style=for-the-badge
 [releases]: https://github.com/dahlb/ha_sense/releases
+[buymecoffee]: https://www.buymeacoffee.com/dahlb
+[buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
