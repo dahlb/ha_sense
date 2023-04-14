@@ -119,7 +119,11 @@ class HaSenseSensorEntity(SensorEntity):
             self.tracked_entity_id
         )
         state = self.hass.states.get(self.tracked_entity_id)
-        watts = float(state.state)
-        if tracked_entity.unit_of_measurement == UnitOfPower.KILO_WATT:
-            watts = watts * 1000
-        self.plug.power = watts
+        try:
+            watts = float(state.state)
+            if tracked_entity.unit_of_measurement == UnitOfPower.KILO_WATT:
+                watts = watts * 1000
+            self.plug.power = watts
+        except ValueError:
+            LOGGER.debug(f"{self.tracked_entity_id} watts value invalid: {state.state}")
+            return
