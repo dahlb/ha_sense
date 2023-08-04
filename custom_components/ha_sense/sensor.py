@@ -11,12 +11,17 @@ from homeassistant.components.sensor import (
     SensorEntity,
     SensorDeviceClass,
 )
-from homeassistant.const import UnitOfPower
+from homeassistant.const import POWER_WATT, POWER_KILO_WATT
 from homeassistant.helpers import device_registry as dr, entity_registry as er
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.device_registry import DeviceEntry
 from homeassistant.helpers.entity_registry import RegistryEntry
-from homeassistant.helpers.event import async_track_state_change_event, Event
+from homeassistant.helpers.event import (
+    EventStateChangedData,
+    async_track_state_change_event,
+)
+from homeassistant.helpers.typing import EventType
+
 
 from .const import ATTRIBUTION, DOMAIN, CONF_DEVICES, PLATFORMS_TO_IGNORE
 
@@ -30,7 +35,7 @@ async def async_setup_entry(hass, entry, async_add_devices):
     for entity in entity_registry.entities.values():
         e: RegistryEntry = entity
         if (
-            e.unit_of_measurement in [UnitOfPower.WATT, UnitOfPower.KILO_WATT]
+            e.unit_of_measurement in [POWER_WATT, POWER_KILO_WATT]
             and e.platform not in PLATFORMS_TO_IGNORE
         ):
             if e.disabled_by is None:
@@ -101,7 +106,7 @@ class HaSenseSensorEntity(SensorEntity):
         )
         self.hass.data[DOMAIN][CONF_DEVICES].append(self.plug)
 
-        def state_automation_listener(_event: Event):
+        def state_automation_listener(_event: EventType[EventStateChangedData]):
             self._update_watts()
 
         self.unsub = async_track_state_change_event(
@@ -121,7 +126,7 @@ class HaSenseSensorEntity(SensorEntity):
         state = self.hass.states.get(self.tracked_entity_id)
         try:
             watts = float(state.state)
-            if tracked_entity.unit_of_measurement == UnitOfPower.KILO_WATT:
+            if tracked_entity.unit_of_measurement == POWER_KILO_WATT:
                 watts = watts * 1000
             self.plug.power = watts
         except ValueError:
