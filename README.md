@@ -24,6 +24,8 @@ Platform | Description
 ## Installation ##
 You can install this either manually copying files or using HACS. Configuration can be done on UI, you need to enter your username and password.
 
+Once you enable the devices you want to track restart home assistant to prevent address already in use error, see https://github.com/dahlb/ha_sense/issues/28
+
 ## Contributions are welcome! ##
 
 If you want to contribute to this please read the [Contribution guidelines](CONTRIBUTING.md)
