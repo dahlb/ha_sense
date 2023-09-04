@@ -1,5 +1,5 @@
 colorlog==6.7.0
 homeassistant==2023.8
 pip>=8.0.3,<23.3
-ruff==0.0.286
+ruff==0.0.287
 sense_energy==0.12.0
