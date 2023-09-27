@@ -43,7 +43,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         LOGGER.debug("printing instance wattages")
         for inst in data[CONF_DEVICES]:
             LOGGER.debug(f"Plug {inst.alias} power: {inst.power}")
-        data[CONF_SENSE_LINK].print_instance_wattages()
 
     async_track_time_interval(hass, debug, timedelta(minutes=2))
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
