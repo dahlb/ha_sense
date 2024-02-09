@@ -11,7 +11,7 @@ from homeassistant.components.sensor import (
     SensorEntity,
     SensorDeviceClass,
 )
-from homeassistant.const import POWER_WATT, POWER_KILO_WATT
+from homeassistant.const import UnitOfPower
 from homeassistant.helpers import device_registry as dr, entity_registry as er
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.device_registry import DeviceEntry
@@ -35,7 +35,7 @@ async def async_setup_entry(hass, entry, async_add_devices):
     for entity in entity_registry.entities.values():
         e: RegistryEntry = entity
         if (
-            e.unit_of_measurement in [POWER_WATT, POWER_KILO_WATT]
+            e.unit_of_measurement in [UnitOfPower.WATT, UnitOfPower.KILO_WATT]
             and e.platform not in PLATFORMS_TO_IGNORE
         ):
             if e.disabled_by is None:
@@ -126,7 +126,7 @@ class HaSenseSensorEntity(SensorEntity):
         state = self.hass.states.get(self.tracked_entity_id)
         try:
             watts = float(state.state)
-            if tracked_entity.unit_of_measurement == POWER_KILO_WATT:
+            if tracked_entity.unit_of_measurement == UnitOfPower.KILO_WATT:
                 watts = watts * 1000
             self.plug.power = watts
         except ValueError:
