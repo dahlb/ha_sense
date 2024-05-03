@@ -20,7 +20,7 @@ from homeassistant.helpers.event import (
     EventStateChangedData,
     async_track_state_change_event,
 )
-from homeassistant.helpers.typing import EventType
+from homeassistant.core import Event
 
 
 from .const import ATTRIBUTION, DOMAIN, CONF_DEVICES, PLATFORMS_TO_IGNORE
@@ -106,7 +106,7 @@ class HaSenseSensorEntity(SensorEntity):
         )
         self.hass.data[DOMAIN][CONF_DEVICES].append(self.plug)
 
-        def state_automation_listener(_event: EventType[EventStateChangedData]):
+        def state_automation_listener(_event: Event[EventStateChangedData]):
             self._update_watts()
 
         self.unsub = async_track_state_change_event(
