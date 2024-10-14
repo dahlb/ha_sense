@@ -7,4 +7,4 @@ ruff==0.6.9
 
 
 
-sense_energy==0.12.4
+sense_energy==0.13.2
