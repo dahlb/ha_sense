@@ -1,3 +1,5 @@
+# THIS REPO IS DEPRECATED: USE https://www.home-assistant.io/integrations/emulated_kasa instead from core.
+
 # Integration ha_sense
 
 [![GitHub Release][releases-shield]][releases]
@@ -9,8 +11,6 @@
 [![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
 ### Warning: this is a new integration and should be considered a project in its Alpha stage. ###
-
-THIS REPO IS DEPRECATED: USE https://www.home-assistant.io/integrations/emulated_kasa instead from core.
 
 Integration to report power usage to [sense][ha_sense] through kasa plug emulation.  This will create a disabled entity for each entity in home assistant that reports power usage in watts, ignoring those from sense and tplink integrations. Enable any created entity to begin emulating a kasa plug for it, disable to stop emulation. Names are copied from derived entity. 
 
